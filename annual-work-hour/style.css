@@ -1,0 +1,136 @@
+
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* set map position and size */
+#map {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    width: 100%;
+}
+
+
+/* set the time slider block style */
+.map-overlay1 {
+    font: 10px/16px 'Verdana', Arial, sans-serif;
+    position: absolute;
+    width: 380px;
+    min-width: 380px;
+    top: 115px;
+    right: 0px;
+    background: #fbfaf8;
+    
+}
+
+
+
+/* set the time slider block style */
+.map-overlay {
+    font: 10px/16px 'Verdana', Arial, sans-serif;
+    position: absolute;
+    width: 380px;
+    min-width: 380px;
+    top: 0px;
+    right: 0px;
+
+}
+
+.map-overlay .map-overlay-inner {
+    
+    background: #fbfaf8;
+    box-shadow:  rgba(0, 0, 0, 0.10);
+    text-align: center;
+    
+    
+}
+
+
+.map-overlay table {
+    border: none;
+    width: 100%;
+}
+
+.map-overlay h2 {
+    line-height: 24px;
+    display: block;
+    margin: 0 0 10px;
+}
+
+
+.map-overlay label {
+    font: 14px/20px 'Verdana', Arial, sans-serif;
+    display: block;
+    vertical-align: middle;
+    margin: 0 0 0 10px;
+    padding: 0;
+}
+
+.map-overlay .legend .bar {
+    height: 10px;
+    width: 100%;
+    background: linear-gradient(to right, #FCA107, #7F3121);
+}
+
+.map-overlay input {
+    background-color: transparent;
+    display: inline-block;
+    width: 100%;
+    min-width: 220px;
+    position: relative;
+    margin: 6px 0 0 0;
+    cursor: ew-resize;
+}
+
+.map-overlay p.credit {
+    margin: 0;
+    padding: 0;
+}
+
+/* set legend block style for countries */
+.map-overlaymore {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    background: #fbfaf8;
+    font: 12px/16px 'Verdana', Arial, sans-serif;
+    overflow: auto;
+    border-radius: 3px;
+    position: absolute;
+    width: 380px;
+    min-width: 380px;
+    height: 280px;
+
+}
+
+/* set popup style */
+.mapboxgl-popup {
+    max-width: 400px;
+    min-width: 180px;
+    font: 12px/20px 'Verdana', Arial, sans-serif;
+    padding: 0;
+    margin: 0, 0, 0, 2px;
+    opacity: 0.6;
+}
+
+.mapboxgl-popup-tip-container {
+    width: 0px;
+    height: 0px;
+    margin: 0 auto;
+    position: relative;
+
+}
+
+.mapboxgl-popup-tip {
+    width: 0;
+    height: 0;
+    margin: 0;
+    border-left: 0 solid transparent;
+    border-right: 0 solid transparent;
+    border-top: 0 solid transparent;
+    box-shadow: none;
+}
+

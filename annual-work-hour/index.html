@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>Average annual hours worked per worker from 2005 to 2020</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+
+    <script charset="utf-8" src="https://d3js.org/d3.v4.min.js"></script>
+    <script charset="utf-8" src="https://cdnjs.cloudflare.com/ajax/libs/dimple/2.3.0/dimple.latest.min.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+
+    <!-- setting css style-->
+    <link href='style.css' rel='stylesheet' />
+
+
+</head>
+
+<body>
+      <!-- add basemap block-->
+      <div id='map'></div>
+
+    <div class="map-overlay1" id="container" style="height: 50%">
+        <h2>Average annual hours worked by region</h2>
+      </div>
+  
+    <!-- add legend block for countries-->
+    <div>
+        <svg class='map-overlaymore' id="legend" height=270 width=320></svg>
+    </div>
+    <!-- add time slider block-->
+    <div class='map-overlay'>
+        <div class='map-overlay-inner'>
+            <h2>Average annual hours worked per worker</h2>
+            <table>
+                <tr>
+                    <td>
+                        <input id='slider' type='range' min='0' max='15' step='1' value='0' list='tickmarks' />
+                        <datalist id="tickmarks">
+                            <option value="0" label="2005">
+                            <option value="1">
+                            <option value="2">
+                            <option value="3">
+                            <option value="4">
+                            <option value="5" label="2010">
+                            <option value="6">
+                            <option value="7">
+                            <option value="8">
+                            <option value="9">
+                            <option value="10" label="2015">
+                            <option value="11">
+                            <option value="12">
+                            <option value="13">
+                            <option value="14">
+                            <option value="15" label="2020">
+                        </datalist>
+                    </td>
+                    <td>
+                        <label id='year'>Years</label>
+                    </td>
+                </tr>
+            </table>
+            <!-- add data source-->
+            <p class="credit">Data source: <a
+                    href="https://www.conference-board.org/data/economydatabase/total-economy-database-productivity"
+                    target="_blank">
+                    Total Economy Database</a>.</p>
+                    <br>
+                    <br>
+        </div>
+    </div>
+
+
+  <!-- add echarts-->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5.3.1/dist/echarts.min.js"></script>
+    <script type="text/javascript">
+        var dom = document.getElementById("container");
+        var myChart = echarts.init(dom);
+        var app = {};
+        var option;
+        option = {
+          title: {
+            text: 'Stacked Line'
+          },
+          tooltip: {
+            trigger: 'axis'
+          },
+          legend: {
+            data: ['Africa', 'Asia', 'Central and Eastern Europe and Central Asia', 'Latin America', 'Middle East',
+              'North America', 'Oceania', 'Western Europe'
+            ]
+          },
+          grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+          },
+          toolbox: {
+            feature: {
+              saveAsImage: {}
+            }
+          },
+          xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            data: ['2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017',
+              '2018', '2019', '2020'
+            ],
+          },
+          yAxis: {
+            type: 'value'
+          },
+          series: [{
+              name: 'Africa',
+              type: 'line',
+              stack: 'Total',
+              data: [2007, 2007, 2006, 2005, 2003, 1999, 1998, 1993, 1995, 2010, 2003, 2008, 2005, 2003, 2005, 1923,
+                1978
+              ]
+            },
+            {
+              name: 'Asia',
+              type: 'line',
+              stack: 'Total',
+              data: [2300, 2295, 2288, 2270, 2252, 2285, 2265, 2264, 2250, 2256, 2255, 2252, 2235, 2223, 2214, 2110,
+                2181
+              ]
+            },
+            {
+              name: 'Central and Eastern Europe and Central Asia',
+              type: 'line',
+              stack: 'Total',
+              data: [1970, 1966, 1964, 1972, 1939, 1942, 1932, 1936, 1937, 1934, 1923, 1926, 1923, 1926, 1921, 1821,
+                1887
+              ]
+            },
+            {
+              name: 'Latin America',
+              type: 'line',
+              stack: 'Total',
+              data: [2021, 2020, 2018, 2021, 1996, 1987, 1989, 1964, 1963, 1957, 1946, 1936, 1929, 1901, 1885, 1749,
+                1856
+              ]
+            },
+            {
+              name: 'Middle East',
+              type: 'line',
+              stack: 'Total',
+              data: [2371, 2373, 2373, 2372, 2370, 2368, 2367, 2364, 2358, 2344, 2330, 2329, 2323, 2314, 2314, 2195,
+                2271
+              ]
+            },
+            {
+              name: 'North America',
+              type: 'line',
+              stack: 'Total',
+              data: [1782, 1781, 1779, 1767, 1734, 1742, 1747, 1750, 1749, 1749, 1756, 1755, 1748, 1761, 1745, 1685,
+                1730
+              ]
+            },
+            {
+              name: 'Oceania',
+              type: 'line',
+              stack: 'Total',
+              data: [1707, 1695, 1686, 1678, 1668, 1671, 1671, 1661, 1674, 1678, 1675, 1664, 1663, 1660, 1674, 1641,
+                1659
+              ]
+            },
+            {
+              name: 'Western Europe',
+              type: 'line',
+              stack: 'Total',
+              data: [1695, 1691, 1690, 1688, 1665, 1657, 1657, 1648, 1641, 1636, 1636, 1644, 1633, 1634, 1632, 1539,
+                1591
+              ]
+            }
+          ]
+        };
+        if (option && typeof option === 'object') {
+          myChart.setOption(option);
+        }
+      </script>
+
+    <script>
+        //1. basemap: add basemap style to the html
+        mapboxgl.accessToken =
+            'pk.eyJ1Ijoic2lyaWthdDkwMTIiLCJhIjoiY2p0Z2MyMXIzMjIxeTRhb2JuaG5pbWZ4eCJ9.clkv6nycz9hXHrgWL2Ur5w';
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/sirikat9012/cl0fuah5b004u14jr2gnnfnvf',
+            center: [80, 35],
+            zoom: 1.5
+        });
+
+        //2. timeslider controling the size and value of the point 
+        // 2.1  Create an array of the available data years
+        var years = [
+            '2005',
+            '2006',
+            '2007',
+            '2008',
+            '2009',
+            '2010',
+            '2011',
+            '2012',
+            '2013',
+            '2014',
+            '2015',
+            '2016',
+            '2017',
+            '2018',
+            '2019',
+            '2020',
+        ];
+
+        // all layers added on the basemap  
+        map.on('load', function () {
+
+            // 2.2 This is the main function that runs when the user changes the data year
+            function setYear(year) {
+
+                document.getElementById('year').textContent = years[year]; // Set the label to the correct year
+
+                var pp = map.getPaintProperty('work', 'circle-radius');
+
+                console.log(pp);
+                pp.property = "w" + years[
+                    year]; // update the pp circle-radius to the new column set by the user
+
+                map.setPaintProperty('work', 'circle-radius', pp);
+
+                console.log(map.getPaintProperty('work', 'circle-radius'));
+
+                var yearcol = "w" + String(years[year]);
+                var textfield = "{" + yearcol + "}";
+
+                console.log(textfield);
+
+                map.setLayoutProperty('labels', 'text-field',
+                    textfield); // update the labels layer to the new column
+                var filters = ['>', yearcol, 1000];
+                map.setFilter('labels', filters);
+            };
+
+            //2.3 add work hour circles
+            map.addLayer({
+                id: 'work',
+                type: 'circle',
+                source: {
+                    type: 'vector',
+                    url: 'mapbox://sirikat9012.7ln3lavm'
+                },
+                'source-layer': 'work_income_xy-cvhyia',
+                'layout': {
+                    visibility: 'visible'
+                },
+                minzoom: 2,
+                paint: {
+                    'circle-color': '#F0401A',
+                    'circle-opacity': 0.45,
+                    'circle-stroke-width': 0.5,
+                    'circle-stroke-color': '#457B9D',
+                    'circle-color': { //set a gradiant color, very subtle visual change
+                        property: 'w2020',
+                        stops: [
+                            [1000, "#A9D6E5"],
+                            [1200, "#A9D6E5"],
+                            [1400, "#61A5C2"],
+                            [1600, "#468FAF"],
+                            [1800, "#2C7DA0"],
+                            [2000, "#2A6F97"],
+                            [2200, "#014F86"],
+                            [2400, "#01497C"],
+                            [2600, "#013A63"],
+                            [2800, "#012A4A"],
+                        ]
+                    },
+                    //'circle-color': '#ced4da', - other color
+                    'circle-stroke-opacity': 0.6,
+                    'circle-radius': {
+                        property: 'w2020',
+                        stops: [
+                            [{
+                                zoom: 1.5,
+                                value: 1
+                            }, 1],
+                            [{
+                                zoom: 1.5,
+                                value: 1200
+                            }, 5],
+                            [{
+                                zoom: 1.5,
+                                value: 1800
+                            }, 8],
+                            [{
+                                zoom: 1.5,
+                                value: 2000
+                            }, 12],
+                            [{
+                                zoom: 1.5,
+                                value: 2100
+                            }, 16],
+                            [{
+                                zoom: 1.5,
+                                value: 2200
+                            }, 20],
+                            [{
+                                zoom: 1.5,
+                                value: 2300
+                            }, 24],
+                            [{
+                                zoom: 1.5,
+                                value: 2600
+                            }, 28],
+                        ]
+                    }
+                }
+
+            });
+
+            // 2.4 add point label layer
+            map.addLayer({
+                'id': 'labels',
+                'type': 'symbol',
+                source: 'work',
+                'source-layer': 'work_income_xy-cvhyia',
+                minzoom: 3,
+                'layout': {
+                    'text-field': '{w2020}',
+                    'text-font': ['DIN Offc Pro Italic', 'Arial Unicode MS Regular'],
+                    'text-size': 14,
+                },
+                'paint': {
+                    'text-color': 'rgba(0,0,0,0.6)'
+                }
+            });
+            // 2.5 Assign an event listner to the slider so that the setYear function runs when the user changes the slider
+            document.getElementById('slider').addEventListener('input', function (e) {
+                var year = parseInt(e.target.value);
+                setYear(year);
+            });
+
+            //2.6 add popup
+            var mypopup = new mapboxgl.Popup({
+                offset: [150, 50],
+                closeButton: false
+            });
+            //another event listner that adds the popup when the user put theris cursor over the table circles
+            map.on('mouseover', 'work', function (e) {
+                mypopup
+                    .setLngLat(e.features[0].geometry.coordinates)
+                    .setHTML('<h3>' + e.features[0].properties.COUNTRY).addTo(map);
+            });
+            //change the cursor to a pointer when the mouse is over the station layers
+            map.on('mouseenter', 'work', function () {
+                map.getCanvas().style.cursor = 'Pointer';
+            });
+            //cahnge it back to a pointer when it leaves and remove the popup window
+            map.on('mouseleave', 'work', function () {
+                map.getCanvas().style.cursor = '';
+                mypopup.remove();
+            });
+
+
+            //3. cluster
+            //3.1 add geojson file for clusters 
+            map.addSource('worka', {
+                type: 'geojson',
+                // Point to GeoJSON data. 
+                data: "https://raw.githubusercontent.com/Siricvbl/visual/main/work_income_xy_08.geojson",
+                cluster: true,
+                clusterMaxZoom: 6, // Max zoom to cluster points on
+                clusterRadius: 50 // Radius of each cluster when clustering points (defaults to 50)
+            });
+            //3.2 add cluster layers 
+            map.addLayer({
+                id: 'clusters',
+                type: 'circle',
+                source: 'worka',
+                filter: ['has', 'point_count'], //using point_count to calculate clusters
+                maxzoom: 2,
+                //paint style
+                paint: {
+                    'circle-color': [
+                        'step',
+                        ['get', 'point_count'],
+                        '#A9D6E5',
+                        5,
+                        '#61A5C2',
+                        10,
+                        '#2C7DA0',
+                        15,
+                        '#2A6F97',
+                        20,
+                        '#014F86'
+                    ],
+                    'circle-radius': [
+                        'step',
+                        ['get', 'point_count'],
+                        9, //the circle - radius
+                        3, //when the point count is 3
+                        18,
+                        5,
+                        27,
+                        10,
+                        36,
+                        15,
+                        40
+                    ]
+                }
+            });
+
+            //3.3 add count numbers 
+            map.addLayer({
+                id: 'cluster-count',
+                type: 'symbol',
+                source: 'worka',
+                filter: ['has', 'point_count'],
+                maxzoom: 2,
+                layout: {
+                    'text-field': '{point_count_abbreviated}',
+                    'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
+                    'text-size': 11
+                }
+            });
+
+            // 3.4 for unclustered point 
+            map.addLayer({
+                id: 'unclustered-point',
+                type: 'circle',
+                source: 'worka',
+                filter: ['!', ['has', 'point_count']],
+                maxzoom: 2,
+                paint: {
+                    'circle-color': '#A9D6E5',
+                    'circle-radius': 4,
+                    'circle-stroke-width': 0.1,
+                    'circle-stroke-color': '#000'
+                }
+            });
+
+            // 3.5 inspect a cluster on click
+            map.on('click', 'clusters', (e) => {
+                const features = map.queryRenderedFeatures(e.point, {
+                    layers: ['clusters']
+                });
+                const clusterId = features[0].properties.cluster_id;
+                map.getSource('worka').getClusterExpansionZoom(
+                    clusterId,
+                    (err, zoom) => {
+                        if (err) return;
+
+                        map.easeTo({
+                            center: features[0].geometry.coordinates,
+                            zoom: zoom
+                        });
+                    }
+                );
+            });
+
+
+            //4. add legend
+            //  select the svg area
+            var SVG = d3.select("#legend")
+
+            // create a list of keys
+            var keys = ['Africa', 'Asia', 'Central and Eastern Europe and Central Asia', 'Latin America',
+                'Middle East',
+                'North America', 'Oceania', 'Western Europe', 'No Data Countries'
+            ]
+            var color1 = ['#fae1dd', '#fec5bb', '#c6d2cf', '#d8e2dc', '#ece4db', '#ffe5d9', '#ffd7ba',
+                '#fec89a',
+                '#f8f7f7'
+            ]
+            // Usually you have a color scale in your chart already
+            var color = d3.scaleOrdinal()
+                .domain(keys)
+                .range(color1);
+            // Add one dot in the legend for each name.
+            var size = 20
+            SVG.selectAll("mydots")
+                .data(keys)
+                .enter()
+                .append("rect")
+                .attr("x", 20)
+                .attr("y", function (d, i) {
+                    return 20 + i * (size + 5)
+                }) // 100 is where the first dot appears. 25 is the distance between dots
+                .attr("width", size)
+                .attr("height", size)
+                .style("fill", function (d) {
+                    return color(d)
+                })
+            // Add one dot in the legend for each name.
+            SVG.selectAll("mylabels")
+                .data(keys)
+                .enter()
+                .append("text")
+                .attr("x", 20 + size * 1.2)
+                .attr("y", function (d, i) {
+                    return 20 + i * (size + 5) + (size / 2)
+                }) // 100 is where the first dot appears. 25 is the distance between dots
+                .style("fill", "#000")
+                .text(function (d) {
+                    return d
+                })
+                .attr("text-anchor", "left")
+                .style("alignment-baseline", "middle")
+
+                
+        })
+
+
+        
+    </script>
+
+</body>
+
+</html>
